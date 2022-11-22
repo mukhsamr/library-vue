@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        font-family: Roboto, system-ui, sans-serif;
+    }
+}
+
+@layer components {
+    .clickable {
+        @apply cursor-pointer hover:scale-110 transition-transform ease-in-out active:scale-125
+    }
+}
