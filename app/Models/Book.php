@@ -30,8 +30,10 @@ class Book extends Model
     {
         return Attribute::make(
             get: fn () => [
-                'content' => Carbon::parse($this->created_at)->translatedFormat('d M Y'),
-                'tooltips' => $this->created_at->format('H:i:s')
+                'content' => $this->created_at
+                    ? Carbon::parse($this->created_at)->translatedFormat('d M Y')
+                    : null,
+                'tooltips' => $this->created_at?->format('H:i:s')
             ],
         );
     }
@@ -40,8 +42,10 @@ class Book extends Model
     {
         return Attribute::make(
             get: fn () => [
-                'content' => Carbon::parse($this->updated_at)->translatedFormat('d M Y'),
-                'tooltips' => $this->updated_at->format('H:i:s')
+                'content' => $this->updated_at
+                    ? Carbon::parse($this->updated_at)->translatedFormat('d M Y')
+                    : null,
+                'tooltips' => $this->updated_at?->format('H:i:s')
             ],
         );
     }
@@ -50,8 +54,10 @@ class Book extends Model
     {
         return Attribute::make(
             get: fn () => [
-                'content' => Carbon::parse($this->deleted_at)->translatedFormat('d M Y'),
-                'tooltips' => $this->deleted_at->format('H:i:s')
+                'content' => $this->deleted_at
+                    ? Carbon::parse($this->deleted_at)->translatedFormat('d M Y')
+                    : null,
+                'tooltips' => $this->deleted_at?->format('H:i:s')
             ],
         );
     }

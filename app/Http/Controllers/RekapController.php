@@ -38,7 +38,11 @@ class RekapController extends Controller
     {
         return Inertia::render('Rekap/Preview', [
             'nama' => $siswa->nama,
-            'riwayat' => $siswa->loans()->with('book:id,judul,pengarang')->paginate(10)
+            'riwayat' => $siswa
+                ->loans()
+                ->with('book:id,judul,pengarang')
+                ->withTrashed()
+                ->paginate(10)
         ]);
     }
 
@@ -117,7 +121,11 @@ class RekapController extends Controller
     {
         return Inertia::render('Rekap/Preview', [
             'nama' => $staff->nama,
-            'riwayat' => $staff->loans()->with('book:id,judul,pengarang')->paginate(10)
+            'riwayat' => $staff
+                ->loans()
+                ->with('book:id,judul,pengarang')
+                ->withTrashed()
+                ->paginate(10)
         ]);
     }
 

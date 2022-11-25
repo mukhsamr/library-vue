@@ -66,7 +66,6 @@ function simpan() {
             formEdit.reset()
         },
         onError: (errors) => {
-            console.log(errors)
             useToast({
                 icon: 'warning',
                 title: useList(errors)
@@ -108,7 +107,7 @@ function simpan() {
                     <Input v-model="formEdit.lokasi_penyimpanan" label="Lokasi Penyimpanan"
                         :invalid="formEdit.errors.lokasi_penyimpanan" />
                     <Input v-model="formEdit.jenis" :label="true" :invalid="formEdit.errors.jenis"
-                        placeholder="Pisahkan dengan strip (Dewasa - Islami) ">
+                        placeholder="Pisahkan dengan strip (Dewasa - Islam) ">
                     <div class="flex items-center">
                         <span>Jenis</span>
                         <div class="relative">

@@ -101,6 +101,7 @@ Route::middleware(['auth', 'level:3'])->prefix('siswa')->name('siswa')->controll
     Route::patch('update', 'update')->name('.update');
     Route::delete('nonaktif/{siswa}', 'nonaktif')->name('.nonaktif');
     Route::patch('restore/{siswa}', 'restore')->name('.restore')->withTrashed();
+    Route::delete('destroy/{siswa}', 'destroy')->name('.destroy')->withTrashed();
 });
 
 // Staff
@@ -112,6 +113,7 @@ Route::middleware(['auth', 'level:3'])->prefix('staff')->name('staff')->controll
     Route::patch('update', 'update')->name('.update');
     Route::delete('nonaktif/{staff}', 'nonaktif')->name('.nonaktif');
     Route::patch('restore/{staff}', 'restore')->name('.restore')->withTrashed();
+    Route::delete('destroy/{staff}', 'destroy')->name('.destroy')->withTrashed();
 });
 
 // Kelas

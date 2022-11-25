@@ -27,6 +27,7 @@ class BookController extends Controller
             'buku' => Book::when($request->kategori)
                 ->where($request->kategori, 'like', "%$request->keyword%")
                 ->withCount('loans')
+                ->orderBy('nik')
                 ->paginate(10)
                 ->onEachSide(1)
                 ->withQueryString()

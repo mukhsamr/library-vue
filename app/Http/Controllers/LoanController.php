@@ -25,7 +25,7 @@ class LoanController extends Controller
         return Inertia::render('Peminjaman/Form', [
             'listBuku' => Book::select('nik', 'judul')->get(),
             'nikBuku' => $request->nikBuku,
-            'buku' => Book::select('id', 'judul', 'nik', 'pengarang', 'penerbit', 'jumlah_buku')
+            'buku' => Book::select('id', 'judul', 'nik', 'pengarang', 'penerbit', 'jumlah_buku', 'sampul')
                 ->withCount('loans as dipinjam')
                 ->firstWhere('nik', $request->nikBuku),
 

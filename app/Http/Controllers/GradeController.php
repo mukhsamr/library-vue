@@ -96,7 +96,7 @@ class GradeController extends Controller
     {
         return Inertia::render('Kelas/List', [
             'judul' => 'Siswa kelas ' . $kelas->kelas,
-            'siswa' => $kelas->students()->select('id', 'nama', 'nis')->get(),
+            'siswa' => $kelas->students()->select('id', 'nama', 'nis')->orderBy('nama')->get(),
             'kelas' => Grade::select('id', 'kelas')->get()->except($kelas->id)
         ]);
     }

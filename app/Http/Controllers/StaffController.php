@@ -103,7 +103,17 @@ class StaffController extends Controller
     {
         $alert = $this::execute(
             try: fn () => $staff->restore(),
-            message: "pulihkan: $staff->nama"
+            message: "pulihkan: <li>$staff->nama</li>"
+        );
+
+        return back()->with('alert', $alert);
+    }
+
+    public function destroy(Staff $staff)
+    {
+        $alert = $this::execute(
+            try: fn () => $staff->forceDelete(),
+            message: "hapus karyawan: <li>$staff->nama</li>"
         );
 
         return back()->with('alert', $alert);

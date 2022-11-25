@@ -1,10 +1,9 @@
 <script setup>
 import { Layout } from '@/Layouts'
-import { Table, Th, Td } from '@/Components/Tables'
 import { Input } from '@/Components/Form'
 import { Button } from '@/Components'
 import { useForm } from '@inertiajs/inertia-vue3';
-import { useToast } from "@/Composables";
+import { useToast, useList } from "@/Composables";
 import { isEmpty } from "lodash";
 
 
@@ -28,13 +27,25 @@ const formEdit = useForm({
 
 function store() {
     formTambah.post(route('kelas.store'), {
-        onSuccess: () => useToast()
+        onSuccess: () => useToast(),
+        onError: (errors) => {
+            useToast({
+                icon: 'warning',
+                title: useList(errors)
+            })
+        }
     })
 }
 
 function update() {
     formEdit.patch(route('kelas.update'), {
-        onSuccess: () => useToast()
+        onSuccess: () => useToast(),
+        onError: (errors) => {
+            useToast({
+                icon: 'warning',
+                title: useList(errors)
+            })
+        }
     })
 }
 

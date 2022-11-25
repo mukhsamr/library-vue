@@ -4,7 +4,7 @@ import { Input, Select } from '@/Components/Form'
 import { Button } from '@/Components'
 import { useForm } from '@inertiajs/inertia-vue3';
 import { isEmpty } from "lodash";
-import { useToast } from "@/Composables";
+import { useToast, useList } from "@/Composables";
 
 const props = defineProps({
     siswaList: {
@@ -35,13 +35,25 @@ const formEdit = useForm({
 
 function tambah() {
     formTambah.post(route('siswa.store'), {
-        onSuccess: () => useToast()
+        onSuccess: () => useToast(),
+        onError: (errors) => {
+            useToast({
+                icon: 'warning',
+                title: useList(errors)
+            })
+        }
     })
 }
 
 function edit() {
     formEdit.patch(route('siswa.update'), {
-        onSuccess: () => useToast()
+        onSuccess: () => useToast(),
+        onError: (errors) => {
+            useToast({
+                icon: 'warning',
+                title: useList(errors)
+            })
+        }
     })
 }
 
@@ -52,7 +64,7 @@ function edit() {
         <form class="border p-4 mt-4" @submit.prevent="tambah" v-if="isEmpty(siswa)">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
                 <Input v-model="formTambah.nama" required label="Nama" />
-                <Input v-model="formTambah.nis" required label="NIS" type="number" />
+                <Input v-model="formTambah.nis" required label="NIS" />
                 <Select v-model="formTambah.grade_id" required label="Kelas">
                     <option v-for="item in kelas" :value="item.id">{{ item.kelas }}</option>
                 </Select>
@@ -64,7 +76,7 @@ function edit() {
         <form class="border p-4 mt-4" @submit.prevent="edit" v-else>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
                 <Input v-model="formEdit.nama" required label="Nama" />
-                <Input v-model="formEdit.nis" required label="NIS" type="number" />
+                <Input v-model="formEdit.nis" required label="NIS" />
                 <Select v-model="formEdit.grade_id" required label="Kelas">
                     <option v-for="item in kelas" :value="item.id">{{ item.kelas }}</option>
                 </Select>

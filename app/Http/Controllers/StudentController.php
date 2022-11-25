@@ -103,7 +103,17 @@ class StudentController extends Controller
     {
         $alert = $this::execute(
             try: fn () => $siswa->restore(),
-            message: "pulihkan: $siswa->nama"
+            message: "pulihkan: <li>$siswa->nama</li>"
+        );
+
+        return back()->with('alert', $alert);
+    }
+
+    public function destroy(Student $siswa)
+    {
+        $alert = $this::execute(
+            try: fn () => $siswa->forceDelete(),
+            message: "hapus siswa: <li>$siswa->nama</li>"
         );
 
         return back()->with('alert', $alert);

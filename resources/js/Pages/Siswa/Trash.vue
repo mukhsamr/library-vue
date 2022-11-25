@@ -4,7 +4,7 @@ import { Button, Pagination } from '@/Components'
 import { Input } from '@/Components/Form'
 import { Table, Th, Td } from '@/Components/Tables'
 import { useForm } from '@inertiajs/inertia-vue3';
-import { ArrowPathIcon } from '@heroicons/vue/24/outline'
+import { ArrowPathIcon, TrashIcon } from '@heroicons/vue/24/outline'
 import { Inertia } from '@inertiajs/inertia';
 import { useToast } from "@/Composables";
 
@@ -32,6 +32,23 @@ function pulihkan(item) {
     })
 }
 
+function destroy(item) {
+    Inertia.delete(route('siswa.destroy', item.id), {
+        onBefore: () => {
+            const rand = _.random(1, 100)
+            alert('Menghapus permanen akan menghapus semua riwayat peminjaman siswa ini')
+            const verif = prompt(`Ketik ${rand} untuk konfirmasi`)
+
+            if (verif != rand) {
+                alert('Verifikasi gagal')
+            }
+
+            return verif == rand
+        },
+        onSuccess: () => useToast()
+    })
+}
+
 </script>
 
 <template>
@@ -47,8 +64,8 @@ function pulihkan(item) {
                 <Th>Nama</Th>
                 <Th>NIS</Th>
                 <Th>Kelas</Th>
-                <Th>Dihapus</Th>
-                <Th>Pulihkan</Th>
+                <Th>Dinonaktifkan</Th>
+                <Th>Aksi</Th>
             </template>
             <template #body="{ item, key }">
                 <Th>{{ key + siswa.from }}</Th>
@@ -56,9 +73,12 @@ function pulihkan(item) {
                 <Td :text="item.nis" />
                 <Td :text="item.grade.kelas" />
                 <Td :text="item.dihapus" is-time />
-                <Td>
+                <Td class="flex space-x-2">
                     <Button color="success" :icon="ArrowPathIcon" @click="pulihkan(item)">
                         Pulihkan
+                    </Button>
+                    <Button color="danger" :icon="TrashIcon" @click="destroy(item)">
+                        Hapus Permanen
                     </Button>
                 </Td>
             </template>

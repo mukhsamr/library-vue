@@ -33,7 +33,8 @@ function hapus(item) {
             }
 
             return verif == rand
-        }
+        },
+        onSuccess: () => useToast()
     })
 }
 

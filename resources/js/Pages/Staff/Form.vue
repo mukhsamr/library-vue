@@ -4,7 +4,7 @@ import { Input, Select } from '@/Components/Form'
 import { Button } from '@/Components'
 import { useForm } from '@inertiajs/inertia-vue3';
 import { isEmpty } from "lodash";
-import { useToast } from "@/Composables";
+import { useToast, useList } from "@/Composables";
 
 const props = defineProps({
     staffList: {
@@ -35,13 +35,25 @@ const formEdit = useForm({
 
 function tambah() {
     formTambah.post(route('staff.store'), {
-        onSuccess: () => useToast()
+        onSuccess: () => useToast(),
+        onError: (errors) => {
+            useToast({
+                icon: 'warning',
+                title: useList(errors)
+            })
+        }
     })
 }
 
 function edit() {
     formEdit.patch(route('staff.update'), {
-        onSuccess: () => useToast()
+        onSuccess: () => useToast(),
+        onError: (errors) => {
+            useToast({
+                icon: 'warning',
+                title: useList(errors)
+            })
+        }
     })
 }
 
@@ -52,7 +64,7 @@ function edit() {
         <form class="border p-4 mt-4" @submit.prevent="tambah" v-if="isEmpty(staff)">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
                 <Input v-model="formTambah.nama" required label="Nama" />
-                <Input v-model="formTambah.nik" required label="NIK" type="number" />
+                <Input v-model="formTambah.nik" required label="NIK" />
                 <Select v-model="formTambah.unit_id" required label="Kelas">
                     <option v-for="item in unit" :value="item.id">{{ item.unit }}</option>
                 </Select>
@@ -64,7 +76,7 @@ function edit() {
         <form class="border p-4 mt-4" @submit.prevent="edit" v-else>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
                 <Input v-model="formEdit.nama" required label="Nama" />
-                <Input v-model="formEdit.nik" required label="NIK" type="number" />
+                <Input v-model="formEdit.nik" required label="NIK" />
                 <Select v-model="formEdit.unit_id" required label="Unit">
                     <option v-for="item in unit" :value="item.id">{{ item.unit }}</option>
                 </Select>

@@ -23,4 +23,7 @@ export default defineConfig({
             'ziggy': '/vendor/tightenco/ziggy/src/js/vue',
         },
     },
+    build: {
+        chunkSizeWarningLimit: 1000,
+    },
 });

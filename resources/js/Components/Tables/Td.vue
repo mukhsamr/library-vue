@@ -19,7 +19,7 @@ const shortHide = ref(true)
         <span class="peer cursor-pointer select-none">{{ text.content ?? '-' }}</span>
         <span
             class="absolute left-0 -bottom-4 p-2 bg-slate-800 text-white text-xs rounded-sm italic hidden peer-active:inline">
-            {{ text.tooltips }}
+            {{ text.tooltips ?? '-' }}
         </span>
     </td>
     <td :class="style" v-else-if="isDate">

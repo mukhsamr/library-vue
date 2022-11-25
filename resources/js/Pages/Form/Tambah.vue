@@ -80,7 +80,7 @@ function simpan() {
                     <Input v-model="formTambah.lokasi_penyimpanan" label="Lokasi Penyimpanan"
                         :invalid="formTambah.errors.lokasi_penyimpanan" />
                     <Input v-model="formTambah.jenis" :label="true" :invalid="formTambah.errors.jenis"
-                        placeholder="Pisahkan dengan strip (Dewasa - Islami) ">
+                        placeholder="Pisahkan dengan strip (Dewasa - Islam) ">
                     <div class="flex items-center">
                         <span>Jenis</span>
                         <div class="relative">

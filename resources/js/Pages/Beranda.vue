@@ -64,7 +64,7 @@ const props = defineProps({
                 </Table>
             </div>
             <div>
-                <h2 class="font-semibold mb-1">Peminjam terbanyak bulan ini</h2>
+                <h2 class="font-semibold mb-1">Peminjam terbanyak</h2>
                 <Table :items="peminjamTerbanyak">
                     <template #head>
                         <Th>No</Th>

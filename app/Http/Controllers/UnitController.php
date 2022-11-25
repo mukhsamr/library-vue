@@ -96,7 +96,7 @@ class UnitController extends Controller
     {
         return Inertia::render('Unit/List', [
             'judul' => 'Karyawan unit ' . $unit->unit,
-            'staff' => $unit->staff()->select('id', 'nama', 'nik')->get(),
+            'staff' => $unit->staff()->select('id', 'nama', 'nik')->orderBy('nama')->get(),
             'unit' => Unit::select('id', 'unit')->get()->except($unit->id)
         ]);
     }
