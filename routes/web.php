@@ -147,3 +147,8 @@ Route::middleware(['auth', 'level:3'])->prefix('unit')->name('unit')->controller
     Route::get('list/{unit}', 'list')->name('.list');
     Route::patch('updateList', 'updateList')->name('.updateList');
 });
+
+
+Route::fallback(function () {
+    return redirect()->to('/');
+});

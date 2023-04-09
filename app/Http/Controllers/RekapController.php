@@ -68,7 +68,7 @@ class RekapController extends Controller
 
         $path = "storage/export/$kelas->kelas";
 
-        if (!file_exists($path)) mkdir($path);
+        if (!File::exists($path)) mkdir(directory: $path, recursive: true);
 
         foreach ($siswa as $item) {
             $pdf = PDF::loadView('exports.rekap.siswa', [
@@ -90,7 +90,7 @@ class RekapController extends Controller
         $zip->addGlob("$path/*.pdf", 0, $options);
         $zip->close();
 
-        if (file_exists($zip_file)) File::cleanDirectory($path);
+        if (File::exists($zip_file)) File::cleanDirectory($path);
 
         return response()->download($zip_file);
     }
@@ -151,7 +151,7 @@ class RekapController extends Controller
 
         $path = "storage/export/$unit->unit";
 
-        if (!file_exists($path)) mkdir($path);
+        if (!File::exists($path)) mkdir(directory: $path, recursive: true);
 
         foreach ($staff as $item) {
             $pdf = PDF::loadView('exports.rekap.staff', [
